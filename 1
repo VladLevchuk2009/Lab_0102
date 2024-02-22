@@ -1,0 +1,42 @@
+using System;
+
+namespace ConsoleApp2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] num = new int[10];
+            Console.Write("Array: ");
+            Random random = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                num[i] = random.Next(-10, 10);
+                Console.Write(num[i] + " ");
+            }
+            Console.WriteLine();
+
+            var (min, max) = num.Find();
+
+            Console.WriteLine($"Min: {min}"); 
+            Console.WriteLine($"Max: {max}");
+        }
+    }
+    public static class ArrayExtensions
+    {
+        public static (int min, int max) Find(this int[] arr)
+        { 
+            int min = arr[0];
+            int max = arr[0];
+
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (arr[i] < min)
+                    min = arr[i];
+                else if (arr[i] > max)
+                    max = arr[i];
+            }
+            return (min, max);
+        }
+    }
+}
